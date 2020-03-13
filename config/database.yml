@@ -5,21 +5,24 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: 5
+  host: esports.cluster-chp12zmggztm.us-east-1.rds.amazonaws.com
+  port: 3306
+  username: <%= Rails.application.credentials.rds_user %>
+  password: <%= Rails.application.credentials.rds_password %>
+  socket: /tmp/mysql.sock
+  database: esports
 
 development:
   <<: *default
-  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
 
 production:
   <<: *default
-  database: db/production.sqlite3
