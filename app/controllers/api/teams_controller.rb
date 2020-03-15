@@ -1,5 +1,8 @@
-class Api::TeamsController < Api::RequestHandlerController
-  def index
-    respond({"response": 'rendered'})
+class Api::TeamsController < ApplicationController
+  include Crudable
+  include RequestHandler
+
+  def initialize
+    @model = 'Team'.constantize
   end
 end
